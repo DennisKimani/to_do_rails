@@ -1,4 +1,9 @@
 class TasksController < ApplicationController
+  def new
+    @list = List.find(params[:list_id])
+    @task = @list.tasks.new
+  end
+
   def create
     @list = List.find(params[:list_id])
     @task = @list.tasks.new(task_params)
@@ -28,10 +33,10 @@ class TasksController < ApplicationController
       render :edit
     end
   end
-end
 
   private
 
   def task_params
     params.require(:task).permit(:description)
   end
+end
